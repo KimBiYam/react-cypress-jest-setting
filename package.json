@@ -3,6 +3,7 @@
   "version": "0.1.0",
   "private": true,
   "dependencies": {
+    "@craco/craco": "^6.4.3",
     "@testing-library/jest-dom": "^5.16.4",
     "@testing-library/react": "^13.0.1",
     "@testing-library/user-event": "^13.5.0",
@@ -17,10 +18,14 @@
     "web-vitals": "^2.1.4"
   },
   "scripts": {
-    "start": "react-scripts start",
-    "build": "react-scripts build",
-    "test": "react-scripts test",
-    "eject": "react-scripts eject"
+    "start": "craco start",
+    "build": "craco build",
+    "test": "craco test",
+    "eject": "react-scripts eject",
+    "cypress:start:app": "cross-env BROWSER=none craco start",
+    "cypress:start:wait": "start-server-and-test cypress:start:app http://localhost:3000",
+    "cypress:open": "npm run cypress:start:wait -- \"cypress open\"",
+    "cypress:run": "npm run cypress:start:wait -- \"cypress run\""
   },
   "eslintConfig": {
     "extends": [
@@ -39,5 +44,11 @@
       "last 1 firefox version",
       "last 1 safari version"
     ]
+  },
+  "devDependencies": {
+    "cross-env": "^7.0.3",
+    "cypress": "^9.5.4",
+    "eslint-plugin-cypress": "^2.12.1",
+    "start-server-and-test": "^1.14.0"
   }
 }
