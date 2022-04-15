@@ -20,13 +20,18 @@
   "scripts": {
     "start": "craco start",
     "build": "craco build",
-    "test": "craco test",
-    "test:cov": "craco test --coverage --watchAll=false",
     "eject": "react-scripts eject",
     "cypress:start:app": "NODE_ENV=e2e dotenv -e .env.test cross-env BROWSER=none craco start",
     "cypress:start:wait": "start-server-and-test cypress:start:app http://localhost:3000",
     "cypress:open": "npm run cypress:start:wait -- \"cypress open\"",
-    "cypress:run": "npm run cypress:start:wait -- \"cypress run\""
+    "cypress:run": "npm run cypress:start:wait -- \"cypress run\"",
+    "jest": "craco test",
+    "jest:cov": "craco test --coverage --watchAll=false",
+    "test:cov": "npm run jest:cov && npm run cypress:run",
+    "test:combined-cov": "npm run test:cov && npm run combine:test-coverage",
+    "copy:reports": "(mkdir coverage-reports || true) && cp cypress-coverage/coverage-final.json coverage-reports/from-cypress.json && cp jest-coverage/coverage-final.json coverage-reports/from-jest.json",
+    "combine:reports": "npx nyc merge coverage-reports && mv coverage.json .nyc_output/out.json",
+    "combine:test-coverage": "npm run copy:reports && npm run combine:reports && npx nyc report --reporter lcov --report-dir combined-coverage"
   },
   "eslintConfig": {
     "extends": [

@@ -11,6 +11,8 @@
 /cypress-coverage
 /cypress/videos
 /cypress/screenshots
+/coverage-reports
+/combined-coverage
 .nyc_output/
 
 
