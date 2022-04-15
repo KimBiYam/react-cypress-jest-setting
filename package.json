@@ -22,7 +22,7 @@
     "build": "craco build",
     "test": "craco test",
     "eject": "react-scripts eject",
-    "cypress:start:app": "cross-env BROWSER=none craco start",
+    "cypress:start:app": "dotenv -e .env.test cross-env BROWSER=none craco start",
     "cypress:start:wait": "start-server-and-test cypress:start:app http://localhost:3000",
     "cypress:open": "npm run cypress:start:wait -- \"cypress open\"",
     "cypress:run": "npm run cypress:start:wait -- \"cypress run\""
@@ -48,6 +48,8 @@
   "devDependencies": {
     "cross-env": "^7.0.3",
     "cypress": "^9.5.4",
+    "dotenv": "^16.0.0",
+    "dotenv-cli": "^5.1.0",
     "eslint-plugin-cypress": "^2.12.1",
     "start-server-and-test": "^1.14.0"
   }
